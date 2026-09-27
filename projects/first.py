@@ -60,6 +60,20 @@ def complete_task():
     except ValueError:
                 print("Please enter a number")
 
+
+def edit_task():
+    try:
+        taskNumber = int(input("Which task do you want to edit: "))
+        if 1 <= taskNumber <= len(tasks):
+            newTask = input("Enter new task: ")
+            tasks[taskNumber - 1][0] = newTask
+        else:
+            print("Invalid task number")
+    except ValueError:
+        print("Please enter a number")
+    # newTask = input("Enter new task: ")
+    # tasks[taskNumber - 1][0] = newTask
+
 running  = True
 
 
@@ -74,6 +88,7 @@ while running:
     print("3. Delete task")
     print("4. Mark task as completed")
     print("5. Exit")
+    print("6. Edit task")
 
     choice = input("Choose an option: ")
 
@@ -95,6 +110,8 @@ while running:
         print("| Goodbye! |")
         print("------------")
         running = False
+    elif choice == "6":
+        edit_task()
 
     else :
         print("Invaild Option")
