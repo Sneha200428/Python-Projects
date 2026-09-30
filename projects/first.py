@@ -71,8 +71,35 @@ def edit_task():
             print("Invalid task number")
     except ValueError:
         print("Please enter a number")
-    # newTask = input("Enter new task: ")
-    # tasks[taskNumber - 1][0] = newTask
+
+def incomplete_task():
+    if not tasks:
+        print("You have not add any task yet.")
+        return
+    try:
+        task_number = int(input("Which task do you want to mark incomplete: "))
+        if 1 <= task_number <= len(tasks):
+            tasks[task_number - 1][1] = False
+        else:
+            print("Invalid task number")
+    except ValueError:
+        print("Please enter a number")
+
+
+def search_task():
+    if not tasks:  
+        print("You have not add any task yet.")
+        return
+    
+    search = input("What task do you want to search: ")
+    search = search.lower()
+    found = False
+    for task in tasks:
+        if search in task[0].lower():
+            print(task[0])
+            found = True
+    if not found:
+        print("No matching task found.")
 
 running  = True
 
@@ -89,6 +116,8 @@ while running:
     print("4. Mark task as completed")
     print("5. Exit")
     print("6. Edit task")
+    print("7. Mark task as incomplete")
+    print("8. Search task")
 
     choice = input("Choose an option: ")
 
@@ -110,8 +139,15 @@ while running:
         print("| Goodbye! |")
         print("------------")
         running = False
+    
     elif choice == "6":
         edit_task()
+
+    elif choice == "7":
+        incomplete_task()
+
+    elif choice == "8":
+        search_task()
 
     else :
         print("Invaild Option")
