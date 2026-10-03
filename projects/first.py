@@ -123,6 +123,21 @@ def clear_completed_tasks():
         print("No completed tasks found")
 
 
+def task_summary():
+    total_task = len(tasks)
+    completed = 0
+
+    for task in tasks:
+        if task[1]:
+            completed += 1
+
+    pending_task = total_task - completed
+    print("=========== Task Summary ===========")
+    print("Total task:", total_task)
+    print("Completed task:", completed)
+    print("Pending Task:", pending_task)
+
+
 running  = True
 
 
@@ -141,6 +156,7 @@ while running:
     print("7. Mark task as incomplete")
     print("8. Search task")
     print("9. clear completed task")
+    print("10. Task summary")
 
     choice = input("Choose an option: ")
 
@@ -174,6 +190,9 @@ while running:
 
     elif choice == "9":
         clear_completed_tasks()
+
+    elif choice == "10":
+        task_summary()
 
     else :
         print("Invaild Option")
