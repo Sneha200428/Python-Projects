@@ -15,8 +15,13 @@ def load_tasks():
         return []        
 
 def add_tasks():
-    task = input("Enter your task: ")
-    tasks.append([task, False])
+    while True:
+        task = input("Enter your task: ")
+    
+        if task.strip():
+            tasks.append([task, False])
+            break
+        print("Task cannot empty. Please try again.")
 
 def view_task():
     if not tasks:
