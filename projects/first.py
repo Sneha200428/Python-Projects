@@ -101,6 +101,28 @@ def search_task():
     if not found:
         print("No matching task found.")
 
+
+def clear_completed_tasks():
+    if not tasks:
+        print("You have not add any task yet.")
+        return
+    
+    remainingTask = []
+    completed_task_found = False
+
+    for task in tasks:
+        if not task[1]:
+            remainingTask.append(task)
+        else:
+            completed_task_found = True
+
+    tasks[:] = remainingTask
+    if completed_task_found:
+        print("Completed tasks cleared")
+    else:
+        print("No completed tasks found")
+
+
 running  = True
 
 
@@ -118,6 +140,7 @@ while running:
     print("6. Edit task")
     print("7. Mark task as incomplete")
     print("8. Search task")
+    print("9. clear completed task")
 
     choice = input("Choose an option: ")
 
@@ -148,6 +171,9 @@ while running:
 
     elif choice == "8":
         search_task()
+
+    elif choice == "9":
+        clear_completed_tasks()
 
     else :
         print("Invaild Option")
