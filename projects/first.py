@@ -137,6 +137,18 @@ def task_summary():
     print("Completed task:", completed)
     print("Pending Task:", pending_task)
 
+def clear_all_task():
+    if not tasks:
+        print("You have not add any task yet.")
+        return
+
+    confirm = input("Are you sure you want to delete all tasks? (y/n): ")
+
+    if confirm.lower() == "y":
+        tasks.clear()
+        print("All tasks cleared.")
+    else:
+        print("Tasks were not cleared.")
 
 running  = True
 
@@ -157,6 +169,7 @@ while running:
     print("8. Search task")
     print("9. clear completed task")
     print("10. Task summary")
+    print("11. Clear all tasks")
 
     choice = input("Choose an option: ")
 
@@ -193,6 +206,9 @@ while running:
 
     elif choice == "10":
         task_summary()
+
+    elif choice == "11":
+        clear_all_task()
 
     else :
         print("Invaild Option")
