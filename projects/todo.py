@@ -16,19 +16,20 @@ def load_tasks():
         return []        
 
 
-def add_tasks():
+def add_task():
     while True:
         task = input("Enter your task: ")
     
         if task.strip():
             tasks.append([task, False])
             break
-        print("Task cannot empty. Please try again.")
+        print("Task cannot be empty. Please try again.")
 
 
 def view_task():
     if not tasks:
-        print("You have not add any task yet.")
+        print("You have not added any task yet.")
+        return
     
     for index, t in enumerate(tasks, start=1):
     
@@ -40,7 +41,8 @@ def view_task():
 
 def delete_task():
     if not tasks:
-        print("You have not add any task yet.")
+        print("You have not added any task yet.")
+        return
     
     try:
         delete = int(input("Which task u want to delete: "))
@@ -48,7 +50,7 @@ def delete_task():
         if 1 <= delete <= len(tasks):
             confirm = input(f'Are you sure you want to delete "{tasks[delete - 1][0]}"? (y/n): ')
 
-            if confirm == "y":
+            if confirm.lower() == "y":
                 tasks.pop(delete - 1)
                 print("Task deleted.")
             else:
@@ -62,7 +64,8 @@ def delete_task():
 
 def complete_task():
     if not tasks:
-        print("You have not add any task yet.")
+        print("You have not added any task yet.")
+        return
     try:
         complete = int(input("Which task did you complete: "))
     
@@ -76,11 +79,18 @@ def complete_task():
 
 
 def edit_task():
+    if not tasks:
+        print("You have not added any task yet.")
+        return
+
     try:
         taskNumber = int(input("Which task do you want to edit: "))
         if 1 <= taskNumber <= len(tasks):
             newTask = input("Enter new task: ")
-            tasks[taskNumber - 1][0] = newTask
+            if newTask.strip():
+                tasks[taskNumber - 1][0] = newTask
+            else:
+                print("Task cannot be empty.")
         else:
             print("Invalid task number")
     except ValueError:
@@ -89,10 +99,10 @@ def edit_task():
 
 def incomplete_task():
     if not tasks:
-        print("You have not add any task yet.")
+        print("You have not added any task yet.")
         return
     try:
-        task_number = int(input("Which task do you want to mark incomplete: "))
+        task_number = int(input("Which task do you want to mark as incomplete: "))
         if 1 <= task_number <= len(tasks):
             tasks[task_number - 1][1] = False
         else:
@@ -103,11 +113,10 @@ def incomplete_task():
 
 def search_task():
     if not tasks:  
-        print("You have not add any task yet.")
+        print("You have not added any task yet.")
         return
     
-    search = input("What task do you want to search: ")
-    search = search.lower()
+    search = input("What task do you want to search: ").lower()
     found = False
     for task in tasks:
         if search in task[0].lower():
@@ -119,7 +128,7 @@ def search_task():
 
 def clear_completed_tasks():
     if not tasks:
-        print("You have not add any task yet.")
+        print("You have not added any task yet.")
         return
     
     remainingTask = []
@@ -133,29 +142,29 @@ def clear_completed_tasks():
 
     tasks[:] = remainingTask
     if completed_task_found:
-        print("Completed tasks cleared")
+        print("Completed tasks cleared.")
     else:
-        print("No completed tasks found")
+        print("No completed tasks found.")
 
 
 def task_summary():
     total_task = len(tasks)
-    completed = 0
+    completedTask = 0
 
     for task in tasks:
         if task[1]:
-            completed += 1
+            completedTask += 1
 
-    pending_task = total_task - completed
+    pending_task = total_task - completedTask
     print("=========== Task Summary ===========")
     print("Total task:", total_task)
-    print("Completed task:", completed)
+    print("Completed task:", completedTask)
     print("Pending Task:", pending_task)
 
 
-def clear_all_task():
+def clear_all_tasks():
     if not tasks:
-        print("You have not add any task yet.")
+        print("You have not added any task yet.")
         return
 
     confirm = input("Are you sure you want to delete all tasks? (y/n): ")
@@ -178,54 +187,54 @@ while running:
     print("===== MY TO-DO LIST =====")
     print("1. Add task")
     print("2. View tasks")
-    print("3. Delete task")
-    print("4. Mark task as completed")
-    print("5. Exit")
-    print("6. Edit task")
-    print("7. Mark task as incomplete")
-    print("8. Search task")
-    print("9. clear completed task")
-    print("10. Task summary")
-    print("11. Clear all tasks")
+    print("3. Edit task") #3
+    print("4. Delete task") #4
+    print("5. Mark task as completed")#5
+    print("6. Mark task as incomplete")#6
+    print("7. Search task")#7
+    print("8. Task summary")#8
+    print("9. clear completed tasks")#9
+    print("10. Clear all tasks")#10
+    print("11. Exit")#11
 
     choice = input("Choose an option: ")
 
     if choice == "1":
-        add_tasks()
+        add_task()
 
     elif choice == "2":
         view_task()
 
     elif choice == "3":
-        delete_task()
-
-    elif choice == "4":
-        complete_task()
-
-    elif choice == "5":
-        save_tasks()
-        print("------------")
-        print("| Goodbye! |")
-        print("------------")
-        running = False
-    
-    elif choice == "6":
         edit_task()
 
-    elif choice == "7":
+    elif choice == "4":
+        delete_task()
+
+    elif choice == "5":
+        complete_task()
+    
+    elif choice == "6":
         incomplete_task()
 
-    elif choice == "8":
+    elif choice == "7":
         search_task()
+
+    elif choice == "8":
+        task_summary()
 
     elif choice == "9":
         clear_completed_tasks()
 
     elif choice == "10":
-        task_summary()
+        clear_all_tasks()
 
     elif choice == "11":
-        clear_all_task()
+        save_tasks()
+        print("------------")
+        print("| Goodbye! |")
+        print("------------")
+        running = False
 
     else :
-        print("Invaild Option")
+        print("Invalid Option")
