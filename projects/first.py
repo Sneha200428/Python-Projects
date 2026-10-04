@@ -5,6 +5,7 @@ def save_tasks():
     with open("tasks.json", "w") as file:
         json.dump(tasks, file)
 
+
 def load_tasks():
     try:
         with open("tasks.json", "r") as file:
@@ -14,6 +15,7 @@ def load_tasks():
     except json.JSONDecodeError:
         return []        
 
+
 def add_tasks():
     while True:
         task = input("Enter your task: ")
@@ -22,6 +24,7 @@ def add_tasks():
             tasks.append([task, False])
             break
         print("Task cannot empty. Please try again.")
+
 
 def view_task():
     if not tasks:
@@ -43,7 +46,13 @@ def delete_task():
         delete = int(input("Which task u want to delete: "))
     
         if 1 <= delete <= len(tasks):
-            tasks.pop(delete - 1)
+            confirm = input(f'Are you sure you want to delete "{tasks[delete - 1][0]}"? (y/n): ')
+
+            if confirm == "y":
+                tasks.pop(delete - 1)
+                print("Task deleted.")
+            else:
+                print("Task was not deleted.")
         else:
             print("Invalid task number")
     
@@ -76,6 +85,7 @@ def edit_task():
             print("Invalid task number")
     except ValueError:
         print("Please enter a number")
+
 
 def incomplete_task():
     if not tasks:
@@ -142,6 +152,7 @@ def task_summary():
     print("Completed task:", completed)
     print("Pending Task:", pending_task)
 
+
 def clear_all_task():
     if not tasks:
         print("You have not add any task yet.")
@@ -154,6 +165,7 @@ def clear_all_task():
         print("All tasks cleared.")
     else:
         print("Tasks were not cleared.")
+
 
 running  = True
 
