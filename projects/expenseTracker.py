@@ -103,6 +103,15 @@ def search_expense():
     if not found:
         print("No matching expense found")
 
+def show_total():
+    if not expenses:
+        print("No expense found")
+        return
+    total = 0
+    for expense in expenses:
+        total += expense["Amount"]
+    print(f"Total spending: ₹{total:.2f}")
+
 def show_menu():
     print("===== EXPENSE TRACKER =====")
     print("1. Add expense")
@@ -127,7 +136,7 @@ while True:
     elif choice == "5":
         search_expense()
     elif choice == "6":
-        print("Show total spending")
+        show_total()
     elif choice == "7":
         print("------------")
         print("| GoodBye! |")
