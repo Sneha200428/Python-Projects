@@ -14,6 +14,17 @@ def load_expenses():
     except json.JSONDecodeError:
         return []
 
+def get_amount(label):
+    while True:
+        try:
+            amount = float(input(label))
+            if amount <= 0:
+                print("Amount must be greater than zero")
+                continue
+            return amount
+        except ValueError:
+            print("Please enter a valid number")
+
 def add_expense():
     while True:
         description = input("Description: ").strip()
@@ -21,22 +32,16 @@ def add_expense():
             print("Description cannot be empty")
             continue
         break
-    while True:
-        try:
-            amount = float(input("Amount: "))
-            if amount <= 0:
-                print("Amount must be greater than zero")
-                continue
-            break
-        except ValueError:
-            print("Please enter valid number")
-            continue
+
+    amount = get_amount("Amount: ")
+
     while True:
         category = input("Category: ").strip()
         if category == "":
             print("Category cannot be empty.")
             continue
         break
+    
     while True:
         try :
             date = input("Date: ").strip()
