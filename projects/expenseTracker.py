@@ -167,10 +167,15 @@ def search_expense():
     if not expenses:
         print("No expense found")
         return
-    search_term = input("What description you want to search: ").strip()
+    while True:
+        search_term = input("Enter description or category to search: ").strip()
+        if search_term == "":
+            print("Search term cannot be empty.")
+            continue
+        break
     found = False
     for expense in expenses:
-        if search_term.lower() in expense["Description"].lower():
+        if search_term.lower() in expense["Description"].lower() or search_term.lower() in expense["Category"].lower():
             found = True
             print(f"{expense['Description']} - ₹{expense['Amount']}")
     if not found:
