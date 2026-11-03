@@ -193,14 +193,17 @@ def show_total():
 expenses = load_expenses()
 
 def show_menu():
-    print("===== EXPENSE TRACKER =====")
-    print("1. Add expense")
-    print("2. View expenses")
-    print("3. Edit expense")
-    print("4. Delete expense")
-    print("5. Search expenses")
-    print("6. Show total spending")
-    print("7. Exit")
+    print("""
+                            ===== EXPENSE TRACKER =====
+                            1. Add expense.
+                            2. View expense.
+                            3. Edit expense.
+                            4. Delete expense.
+                            5. Search expenses.
+                            6. Show total spending.
+                            7. Exit.
+
+""")
 
 while True:
     show_menu()
