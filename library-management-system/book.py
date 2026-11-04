@@ -28,14 +28,4 @@ class Book:
         else:
             print("Availability: Borrowed")
 
-book1 = Book("B001", "Atomic Habits", "James clear")
-book2 = Book("B002", "Python Crash Course", "Eric Metthes")
-
-book1.display_info()
-book2.display_info()
-book1.borrow_book()
-book1.display_info()
-book2.display_info()
-book1.return_book()
-book1.display_info()
 
